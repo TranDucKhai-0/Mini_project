@@ -10,7 +10,7 @@ using namespace std;
 void addData(void);
 void viewData(void);
 void mainMenu(void);
-//void updateData(void);
+void updateData(void);
 void deleteData(void);
 void adminVerification(void);
 void studentFunction(void);
@@ -21,7 +21,7 @@ void adminFunction()
     cout << "\n\n\t\t\t\t\t | Logged In as Admin |\n";
     cout << "\n\n\t\t\t\t\t 1. Add Students Detail";
     cout << "\n\n\t\t\t\t\t 2. Delete Students";
-    //cout << "\n\n\t\t\t\t\t 3. update Record";
+    cout << "\n\n\t\t\t\t\t 3. update Record";
     cout << "\n\n\t\t\t\t\t 4. View Table ";
     cout << "\n\n\t\t\t\t\t 5. Main Menu ";
     cout << "\n\n\t\t\t\t\t 6. Exit";
@@ -45,7 +45,7 @@ void adminFunction()
                 break;
 
             case 3:
-                cout << "this option is not available"; //updateData();
+                cout << "this option is not available"; // updateData();
                 break;
 
             case 4:
@@ -134,7 +134,7 @@ void mainMenu()
     system("pause");
 }
 
-// all Functions for Admin below
+// tất cả các chức năng dành cho quản trị viên bên dưới
 
 void deleteData()
 {
@@ -360,7 +360,7 @@ void updateData()
 
         // renaming the updated file with the existing file name
         rename("datadnew.csv", "data.csv");
-    
+
 }
 
 */
@@ -519,6 +519,7 @@ void studentFunction()
     if (!file)
     {
         cout << "fail in opening the file";
+        return; // dừng hàm khi không mở được file
     }
     cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
 

@@ -9,13 +9,10 @@ using namespace std;
 
 void mainMenu(void);
 
-const string PASSWORD = "Khaideptrai" ;
-
-
 void loadingBar()
 {
 	system("cls");
-	system("color 3F");
+	system("color 70");
 
 	char a = 177, b = 219;
 	cout << "\n\n\n\n\n\t\t\t\t\tStudent's Data Management System";
@@ -33,9 +30,9 @@ void loadingBar()
 	for (int i = 0; i < 26; i++)
 	{
 		cout << b;
-		Sleep(200);
+		Sleep(50);
 	}
-	Sleep(1000); // chờ 1 giây
+	Sleep(700); // chờ 1 giây
     mainMenu();
 
 }

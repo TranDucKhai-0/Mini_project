@@ -4,6 +4,7 @@
 #include <string>
 #include <Windows.h>
 #include <stdlib.h>
+#include "giaodien.h"
 
 using namespace std;
 
@@ -15,91 +16,73 @@ void deleteData(void);
 void adminVerification(void);
 void studentFunction(void);
 
+// sửa đổi
 void adminFunction()
 {
     system("cls");
     cout << "\n\n\t\t\t\t\t | Logged In as Admin |\n";
-    cout << "\n\n\t\t\t\t\t 1. Add Students Detail";
-    cout << "\n\n\t\t\t\t\t 2. Delete Students";
-    cout << "\n\n\t\t\t\t\t 3. update Record";
-    cout << "\n\n\t\t\t\t\t 4. View Table ";
-    cout << "\n\n\t\t\t\t\t 5. Main Menu ";
-    cout << "\n\n\t\t\t\t\t 6. Exit";
 
-    int option;
-    cout << "\n\n\t\t\t\t\tEnter choice : ";
-    do
+    string Menu[] = {
+        "Add Students Detail", 
+        "Delete Students", 
+        "Update Record",
+        "View Table",
+        "Main Menu",
+        "Exit"
+    }; // xuất menu có thể thao tác bằng phím
+
+    int n = sizeof(Menu) / sizeof(Menu[0]); // lấy độ dài mảng
+    int choice = menu(Menu, n); // chọn mục chức năng
+
+    switch (choice)
     {
-        cin >> option;
+        case 1:
+            addData();
+            break;
 
-        {
-            switch (option)
-            {
+        case 2:
+            deleteData();
+            break;
 
-            case 1:
-                addData();
-                break;
+        case 3:
+            cout << "this choice is not available"; // updateData();
+            break;
 
-            case 2:
-                deleteData();
-                break;
+        case 4:
+            viewData();
+            break;
 
-            case 3:
-                cout << "this option is not available"; // updateData();
-                break;
+        case 5:
+            mainMenu();
+            break;
 
-            case 4:
-                viewData();
-                break;
+        case 6:
+            system("cls");
+            TextColor(0); // Giữ lại màu chữ đen
+            cout << "\t\t\n\n\n\n\n\n\n\t\t\t\t\tQuitting The Program";
 
-            case 5:
-                mainMenu();
-                break;
-
-            case 6:
-                system("cls");
-                cout << "\t\t\n\n\n\n\n\n\n\t\t\t\t\tQuitting The Program";
-
-                for (int i = 0; i < 4; i++)
-                {
-
-                    Sleep(1000);
-                    cout << ".";
-                }
-                exit(0);
-                break;
-
-            default:
-                system("cls");
-                cout << "\n\n\t\t\t\t\t Logged In as Admin";
-                cout << "\n\n\t\t\t\t\t 1. Add Students Record";
-                cout << "\n\n\t\t\t\t\t 2. Delete Record";
-                //  cout << "\n\n\t\t\t\t\t 3. update Record";
-                cout << "\n\n\t\t\t\t\t 4. View Table ";
-                cout << "\n\n\t\t\t\t\t 5. Main Menu ";
-                cout << "\n\n\t\t\t\t\t 6. Exit";
-
-                cout << "\n\n\t\t\t\t\t invalid input!";
-
-                cout << "\n\n\t\t\t\t\t Enter choice : ";
+            for (int i = 0; i < 3; i++) {
+                Sleep(500);
+                cout << ".";
             }
-        }
-
-    } while (option != '6');
+            exit(0);
+            break;
+    }
 }
 
-void mainMenu()
+void  mainMenu()
 {
     system("cls");
 
     cout << "\n\n\n\n\t\t\t\t\t Login As : ";
-    cout << "\n\n\n\t\t\t\t\t 1. Admin ";
-    cout << "\n\n\t\t\t\t\t 2. Student";
-    cout << "\n\n\t\t\t\t\t 3. Exit";
-    cout << "\n\n\n\t\t\t\t\t Enter your choice : ";
+    string Menu[] = {
+        "Admin", 
+        "Student", 
+        "Exit"
+    }; // xuất menu có thể thao tác bằng phím
+    int n = sizeof(Menu) / sizeof(Menu[0]); // lấy độ dài mảng
+    int choice = menu(Menu, n); // chọn mục chức năng
 
-    int choice;
-    cin >> choice;
     switch (choice)
     {
     case 1:
@@ -222,7 +205,7 @@ void deleteData()
     adminFunction();
 }
 
-/*
+
 void updateData()
 {
     system("cls");
@@ -363,7 +346,7 @@ void updateData()
 
 }
 
-*/
+
 void addData()
 {
     system("cls");
@@ -426,7 +409,7 @@ void addData()
         adminFunction();
 
     else
-        cout << "\nEnter a valid option";
+        cout << "\nEnter a valid choice";
 
     adminFunction();
 }
@@ -440,6 +423,7 @@ void viewData()
     if (!file)
     {
         cout << "fail in opening the file";
+        return; //
     }
     cout << "\n\t\t\t\t\t\t|Students Record| \n\n";
 
@@ -464,17 +448,46 @@ void viewData()
         cout << rollNumber << " \t " << name << "\t\t\t" << college << " \t\t" << branch << " \t\t" << attendance << " \t\t" << physics << " \t\t" << chemistry << " \t\t" << maths << endl;
         cout << endl;
     }
-
     cout << "\n-----------------------------------------------------------------------------------------------------------------------" << endl;
     file.close();
 
-    cout << "\n\n 1. Add Record\n";
-    cout << " 2. Delete Record\n";
-    cout << " 3. Update Record\n";
-    cout << " 5. Main Menu\n";
-    cout << " 6. Exit\n";
-    cout << "\nEnter choice : ";
-    // adminFunction();
+    system("pause"); // chờ xem bảng dữ liệu SV
+
+    // sửa đổi
+    cout << "\n\n";
+    string Menu[] = {
+        "Add Record",
+        "Delete Record", 
+        "Update Record", 
+        "Main Menu",
+        "Exit"
+    }; // xuất menu có thể thao tác bằng phím
+
+    int n = sizeof(Menu) / sizeof(Menu[0]); // lấy độ dài mảng
+    int choice = menu(Menu, n); // chọn mục chức năng
+    
+    switch (choice) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            mainMenu();
+            break;
+        case 5:
+            system("cls");
+                cout << "\t\t\n\n\n\n\n\n\n\t\t\t\t\tQuitting The Program";
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Sleep(1000);
+                    cout << ".";
+                }
+                exit(0);
+            break;
+        }
 }
 
 void adminVerification()
@@ -518,7 +531,7 @@ void studentFunction()
 
     if (!file)
     {
-        cout << "fail in opening the file";
+        cout << "fail in opening the file" << endl;
         return; // dừng hàm khi không mở được file
     }
     cout << "\n\t\t\t\t\t\t|Students Record| \n\n";

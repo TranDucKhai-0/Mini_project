@@ -12,6 +12,25 @@
 
 using namespace std;
 
+// Đặt trạng thái con trỏ
+void Cursor(bool logic) {
+    // Lấy handle cho cửa sổ console hiện tại
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hConsole == INVALID_HANDLE_VALUE) {
+        return; // Thoát nếu không lấy được handle
+    }
+
+    // Cấu trúc chứa thông tin về con trỏ console
+    CONSOLE_CURSOR_INFO cursorInfo;
+
+    // Lấy thông tin hiện tại của con trỏ
+    if (GetConsoleCursorInfo(hConsole, &cursorInfo)) {
+        cursorInfo.bVisible = logic; // TRUE bật, FALSE tắt
+        SetConsoleCursorInfo(hConsole, &cursorInfo); // Áp dụng thay đổi
+    }
+}
+
+
 // hàm tô màu chữ (lấy từ thư viện console.h)
 void TextColor(int color)
 {
@@ -23,9 +42,6 @@ void TextColor(int color)
     int newColor = (csbi.wAttributes & 0xF0) | (color & 0x0F);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), newColor);
 }
-
-
-string Menu[3] = {"33", "38", "34"};
 
 // Trạng thái thao tác chọn trong Menu (định nghĩa các thao tác có nghĩa)
 enum TRANGTHAI{UP, DOWN, ENTER, NONE};
@@ -46,7 +62,7 @@ TRANGTHAI Event(int x) {
     return NONE;
 }
 
-int menu(string Menu[], int n) {
+int menu(string NameMenu, string Menu[], int n) {
     int thaotac = 0; // biến chỉ vị trí thao tác, =0 là ở vị trí đầu
     int *mau = new int[n]; // cấp phát bộ nhớ cho mảng
     for(int i = 0; i < n; i++) {
@@ -58,7 +74,9 @@ int menu(string Menu[], int n) {
         system("cls");
 
         // in Menu 
-        cout << "\n";
+        TextColor(MAUNEN);
+        cout << "\n\n\t\t\t\t\t" << NameMenu << endl
+                        << endl;
         for(int i = 0; i < n; i++) {
             TextColor(mau[i]); // in màu cho chữ
             cout << "\n\n\t\t\t\t\t" << i+1 << ". " << Menu[i];

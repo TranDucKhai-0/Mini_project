@@ -74,7 +74,7 @@ int menu(string NameMenu, string Menu[], int n) {
         system("cls");
 
         // in Menu 
-        TextColor(MAUNEN);
+        TextColor(MAUNEN); // tô màu cho tên Menu
         cout << "\n\n\t\t\t\t\t" << NameMenu << endl
                         << endl;
         for(int i = 0; i < n; i++) {

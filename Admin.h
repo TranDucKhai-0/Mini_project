@@ -2,13 +2,14 @@
 #define ADMIN_H
 
 #include <vector>    
-#include "Student.h" 
+#include "Student.h"
+
 using namespace std;
 
 // Lop quan ly sinh vien
 class StudentManager {
 private:
-    vector<Student> students;  // Danh sach sinh vien
+    vector<Student*> students;  // Danh sach sinh vien
     string adminPassword = "admin123"; // Mat khau cua admin
 
 public:

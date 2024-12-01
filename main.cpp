@@ -36,7 +36,11 @@ void loadingBar()
 int main()
 {
     loadingBar();
+    SetConsoleOutputCP(65001); // hiển thị chữ có dấu
     StudentManager manager; // Tao doi tuong StudentManager
+
+    Student KhaiDepTrai("1", "Khải Đẹp Trai", 20, "Vật Lý", 12000000, "khaideptrai");
+    manager.addStudent(KhaiDepTrai);
 
     int choice; // Chon
 
@@ -86,32 +90,44 @@ int main()
                     system("cls");
                     if (adminChoice == 1)
                     { // Them sinh vien moi
-                        string id, name, major, password;
-                        int age;
-                        float tuitionFee;
-                        Cursor(true); // bật con trỏ
+                        bool logic;
+                        do {
+                            string id, name, major, password;
+                            int age;
+                            float tuitionFee;
+                            logic = false; // ngừng vòng lặp
+                            Cursor(true); // bật con trỏ
 
-                        cout << "\n\n\n\n\n\t\t\t\t\tEnter ID (MSV): ";
-                        cin >> id; // Nhap ma sinh vien
-                        cout << "\t\t\t\t\tEnter Name (Ten): ";
-                        cin.ignore();
-                        getline(cin, name); // Nhap ten sinh vien
-                        cout << "\t\t\t\t\tEnter Age (Tuoi): ";
-                        cin >> age; // Nhap tuoi sinh vien
-                        cout << "\t\t\t\t\tEnter Major (Nganh hoc): ";
-                        cin.ignore();
-                        getline(cin, major); // Nhap nganh hoc sinh vien
-                        cout << "\t\t\t\t\tEnter Tuition Fee (Hoc phi): ";
-                        cin >> tuitionFee; // Nhap hoc phi
-                        cout << "\t\t\t\t\tSet Password: ";
-                        cin >> password; // Dat mat khau
+                            cout << "\n\n\n\n\n\t\t\t\t\tEnter ID (MSV): ";
+                            cin >> id; // Nhap ma sinh vien
+                            if(manager.findStudent(id)) { // kiểm tra ID đã tồn tại chưa
+                                logic = true; // chạy vòng lặp
+                                Cursor(false);
+                                cout << "\n\n\n\n\n\t\t\t\t\tID has already existed!\n\n\t\t\t\t\t";
+                                system("pause");
+                                system("cls");
+                                continue;
+                            }
+                            cout << "\t\t\t\t\tEnter Name (Ten): ";
+                            cin.ignore();
+                            getline(cin, name); // Nhap ten sinh vien
+                            cout << "\t\t\t\t\tEnter Age (Tuoi): ";
+                            cin >> age; // Nhap tuoi sinh vien
+                            cout << "\t\t\t\t\tEnter Major (Nganh hoc): ";
+                            cin.ignore();
+                            getline(cin, major); // Nhap nganh hoc sinh vien
+                            cout << "\t\t\t\t\tEnter Tuition Fee (Hoc phi): ";
+                            cin >> tuitionFee; // Nhap hoc phi
+                            cout << "\t\t\t\t\tSet Password: ";
+                            cin >> password; // Dat mat khau
 
-                        Student newStudent(id, name, age, major, tuitionFee, password); // Tao sinh vien moi
-                        manager.addStudent(newStudent);                                 // Them sinh vien vao danh sach
-                        Sleep(400);
-                        cout << "\n\t\t\t\t\tStudent added successfully!\n\n\t\t\t\t\t"; // Thong bao thanh cong
+                            Student newStudent(id, name, age, major, tuitionFee, password); // Tao sinh vien moi
+                            manager.addStudent(newStudent);                                 // Them sinh vien vao danh sach
+                            Sleep(400);
+                            cout << "\n\t\t\t\t\tStudent added successfully!\n\n\t\t\t\t\t"; // Thong bao thanh cong
 
-                        system("pause");
+                            system("pause");
+                        } while(logic);
                     }
                     else if (adminChoice == 2)
                     {
@@ -126,13 +142,13 @@ int main()
                         if (student)
                         {
                             cout << "\n\n\n\n\n\t\t\t\t\tStudent: " << student->getName() << endl;
-                            cout << "\n\n\n\n\n\t\t\t\t\tEnter Subject: ";
+                            cout << "\n\t\t\t\t\tEnter Subject: ";
                             cin >> subject;
-                            cout << "\n\n\n\n\n\t\t\t\t\tEnter Score: ";
+                            cout << "\n\t\t\t\t\tEnter Score: ";
                             cin >> score;
                             student->updateScore(subject, score);
                             Sleep(400);
-                            cout << "\n\n\n\n\n\t\t\t\t\tScore updated successfully!\n\n\t\t\t\t\t";
+                            cout << "\n\n\t\t\t\t\tScore updated successfully!\n\t\t\t\t\t";
                             system("pause");
                         }
                         else
@@ -157,14 +173,14 @@ int main()
                         if (student)
                         {
                             cout << "\n\n\n\n\n\t\t\t\t\tStudent: " << student->getName() << endl;
-                            cout << "\n\n\n\n\n\t\t\t\t\tEnter Date: ";
+                            cout << "\n\t\t\t\t\tEnter Date: ";
                             cin >> date;
-                            cout << "\n\n\n\n\n\t\t\t\t\tEnter New Schedule: ";
+                            cout << "\n\t\t\t\t\tEnter New Schedule: ";
                             cin.ignore();
                             getline(cin, schedule);
                             student->updateClassSchedule(date, schedule);
                             Sleep(400);
-                            cout << "\n\n\n\n\n\t\t\t\t\tSchedule updated successfully!\n\n\t\t\t\t\t";
+                            cout << "\n\n\t\t\t\t\tSchedule updated successfully!\n\n\t\t\t\t\t";
                             system("pause");
                         }
                         else
@@ -189,9 +205,10 @@ int main()
                         if (student)
                         {
                             cout << "\n\n\n\n\n\t\t\t\t\tStudent: " << student->getName() << endl;
-                            cout << "\n\n\n\n\n\t\t\t\t\tEnter Date to Remove Schedule: ";
+                            cout << "\n\t\t\t\t\tEnter Date to Remove Schedule: ";
                             cin >> date;
                             student->removeClassSchedule(date);
+                            system("pause");
                         }
                         else
                         {
@@ -262,8 +279,7 @@ int main()
             Student *student = manager.findStudent(studentId);
             if (student)
             {
-                system("cls");
-                cout << "\n\n\n\n\n\t\t\t\t\tEnter Password: ";
+                cout << "\n\n\t\t\t\t\tEnter Password: ";
                 cin >> password;
 
                 if (student->authenticate(password))
@@ -329,6 +345,6 @@ int main()
 
     system("cls");
     cout << "\n\n\n\n\n\t\t\t\t\tExiting program. Goodbye!\n";
-    Sleep(1000);
+    Sleep(1500);
     return 0;
 }

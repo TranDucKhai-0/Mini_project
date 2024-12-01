@@ -3,6 +3,7 @@
 
 #include <string>   // Bao gom thu vien lam viec voi chuoi
 #include <map>      // Bao gom thu vien lam viec voi bang
+
 using namespace std;
 
 // Lop dai dien cho sinh vien
@@ -18,7 +19,7 @@ private:
     map<string, string> classSchedule;   // Lich hoc cua sinh vien (Ngay : ND)
 
 public:
-    Student(string studentId, string studentName, int studentAge, string studentMajor, float fee, string pwd);
+    Student(string studentId, string studentName, int studentAge, string studentMajor, int fee, string pwd);
     string getId() const;                // Lay ma sinh vien
     string getName() const;// Lay ten sinh vien
     float getTuitionFee() const;        // Thong tin hp      

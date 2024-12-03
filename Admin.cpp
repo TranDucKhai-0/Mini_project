@@ -10,6 +10,18 @@ void StudentManager::addStudent(const Student& student) {
     students.push_back(new Student(student));  // Them sinh vien vao danh sach
 }
 
+bool StudentManager::removeStudent(const string& id_delete) {
+    for (auto it = students.begin(); it != students.end(); ++it) {
+        if ((*it)->getId() == id_delete) {
+            delete *it;               // Xóa bộ nhớ của đối tượng
+            students.erase(it);       // Xóa con trỏ khỏi vector
+            return true;                    // Thoát khỏi vòng lặp (vì chỉ xóa một phần tử)
+        }
+    }
+    return false; // xóa không thành công
+}
+
+
 Student* StudentManager::findStudent(const string& studentId) {
     for (auto& student : students) {  // Duyet qua danh sach sinh vien
         if (student->getId() == studentId) {  // So sanh ma sinh vien
@@ -40,7 +52,7 @@ void StudentManager::displayAllTuitionFees() const{
             cout << "\n\t\t\t\t\t";
             cout << "Name: " << student->getName();
             cout << "\n\t\t\t\t\t";
-            cout << "Tuition Fee: " << student->getTuitionFee() << " VND"<< endl;
+            cout << fixed <<"Tuition Fee: " << student->getTuitionFee() << " VND"<< endl;
         }
     }
 }
@@ -51,7 +63,7 @@ void StudentManager::displayAllClassSchedules() const {
     } else {
         cout << "\n\n";
         for (const auto& student : students) {  // Kiem tung SV
-            cout << "\n\t\t\t\t\tClass Schedule for Student ID: " << student->getId(); 
+            cout << "\n\t\t\t\t\tClass Schedule for Student ID: " << student->getId() << endl; 
             cout << "Name: " << student->getName() << ":\n";
             student->displayClassSchedule();  // Lich hoc
         }

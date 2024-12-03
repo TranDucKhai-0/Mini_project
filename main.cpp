@@ -37,7 +37,7 @@ int main()
 {
     loadingBar();
     SetConsoleOutputCP(65001); // hiển thị chữ có dấu
-    StudentManager manager; // Tao doi tuong StudentManager
+    StudentManager manager;    // Tao doi tuong StudentManager
 
     Student KhaiDepTrai("1", "Khải Đẹp Trai", 20, "Vật Lý", 12000000, "khaideptrai");
     manager.addStudent(KhaiDepTrai);
@@ -75,6 +75,7 @@ int main()
                     string nameMenu = "===== Admin Menu =====";
                     string Menu[] = {
                         "Add Student",           // Menu them sinh vien
+                        "Remove Student",        // xoa sinh vien
                         "Update Scores",         // Menu cap nhat diem
                         "Update Class Schedule", // Menu cap nhat lich hoc
                         "Remove Class Schedule", // Menu xoa lich hoc
@@ -91,16 +92,18 @@ int main()
                     if (adminChoice == 1)
                     { // Them sinh vien moi
                         bool logic;
-                        do {
+                        do
+                        {
                             string id, name, major, password;
                             int age;
                             float tuitionFee;
                             logic = false; // ngừng vòng lặp
-                            Cursor(true); // bật con trỏ
+                            Cursor(true);  // bật con trỏ
 
                             cout << "\n\n\n\n\n\t\t\t\t\tEnter ID (MSV): ";
                             cin >> id; // Nhap ma sinh vien
-                            if(manager.findStudent(id)) { // kiểm tra ID đã tồn tại chưa
+                            if (manager.findStudent(id))
+                            {                 // kiểm tra ID đã tồn tại chưa
                                 logic = true; // chạy vòng lặp
                                 Cursor(false);
                                 cout << "\n\n\n\n\n\t\t\t\t\tID has already existed!\n\n\t\t\t\t\t";
@@ -127,9 +130,36 @@ int main()
                             cout << "\n\t\t\t\t\tStudent added successfully!\n\n\t\t\t\t\t"; // Thong bao thanh cong
 
                             system("pause");
-                        } while(logic);
+                        } while (logic);
                     }
                     else if (adminChoice == 2)
+                    {
+                        string id;
+                        char logic;
+                        Cursor(true);
+                        cout << "\n\n\n\n\n\t\t\t\t\tEnter ID (MSV): ";
+                        cin >> id;
+                        cout << "\n\n\t\t\t\t\tAre you sure? (Y/N): ";
+                        cin >> logic;
+                        if (logic == 'y' || logic == 'Y')
+                        {
+                            if (manager.removeStudent(id))
+                            {
+                                cout << "\n\n\t\t\t\t\tStudent removed successfully!\n";
+                            }
+                            else
+                            {
+                                cout << "\n\n\t\t\t\t\tStudent not found!\n";
+                            }
+                        }
+                        else if (logic == 'n' || logic == 'N')
+                        {
+                            continue;
+                        }
+                        cout << "\n\t\t\t\t\t";
+                        system("pause");
+                    }
+                    else if (adminChoice == 3)
                     {
                         string id, subject;
                         float score;
@@ -159,7 +189,7 @@ int main()
                             system("pause");
                         }
                     }
-                    else if (adminChoice == 3)
+                    else if (adminChoice == 4)
                     {
                         string id, date, schedule;
 
@@ -191,7 +221,7 @@ int main()
                             system("pause");
                         }
                     }
-                    else if (adminChoice == 4)
+                    else if (adminChoice == 5)
                     {
                         string id, date;
 
@@ -218,25 +248,25 @@ int main()
                             system("pause");
                         }
                     }
-                    else if (adminChoice == 5)
+                    else if (adminChoice == 6)
                     {
                         manager.displayAllStudents();
                         cout << "\n\t\t\t\t\t";
                         system("pause");
                     }
-                    else if (adminChoice == 6)
+                    else if (adminChoice == 7)
                     {
                         manager.displayAllTuitionFees();
                         cout << "\n\t\t\t\t\t";
                         system("pause");
                     }
-                    else if (adminChoice == 7)
+                    else if (adminChoice == 8)
                     {
                         manager.displayAllClassSchedules();
                         cout << "\n\t\t\t\t\t";
                         system("pause");
                     }
-                    else if (adminChoice == 8)
+                    else if (adminChoice == 9)
                     {
                         Cursor(true); // bật con trỏ
                         string input;
@@ -260,7 +290,7 @@ int main()
                             system("pause");
                         }
                     }
-                } while (adminChoice != 9); // nếu chọn 9 là logout
+                } while (adminChoice != 10); // nếu chọn 9 là logout
             }
             else
             {

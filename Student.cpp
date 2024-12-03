@@ -7,7 +7,7 @@ Student::Student(string studentId, string studentName, int studentAge, string st
 
 string Student::getId() const { return id; }                // Ma sinh vien
 string Student::getName() const { return name; }            // Ten sinh vien
-float Student::getTuitionFee() const { return tuitionFee; } // hoc phi
+int Student::getTuitionFee() const { return tuitionFee; } // hoc phi
 bool Student::authenticate(const string &inputPassword) const
 {
     return inputPassword == password; // Xac thuc mat khau cua sinh vien
@@ -40,7 +40,7 @@ void Student::displayScores() const
     {
         cout << "\n\n\n\n\n\t\t\t\t\tScores:\n";
         for (const auto &entry : scores)
-        {                                                                // Duyet qua danh sach diem
+        {                                                                          // Duyet qua danh sach diem
             cout << "\t\t\t\t\t  " << entry.first << ": " << entry.second << endl; // Hien thi diem cua tung mon hoc
         }
     }
@@ -49,14 +49,14 @@ void Student::displayScores() const
 void Student::displayClassSchedule() const
 {
     if (classSchedule.empty())
-    {                                                                 // Neu lich hoc rong
+    {                                                         // Neu lich hoc rong
         cout << "\n\t\t\t\t\tNo class schedule available!\n"; // Thong bao khong co lich hoc
     }
     else
     {
         cout << "\n\t\t\t\t\tClass Schedule:\n";
         for (const auto &entry : classSchedule)
-        {                                                                // Duyet qua lich hoc
+        {                                                                          // Duyet qua lich hoc
             cout << "\t\t\t\t\t  " << entry.first << ": " << entry.second << endl; // Hien thi lich hoc theo ngay
         }
     }

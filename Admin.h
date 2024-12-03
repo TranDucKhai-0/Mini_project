@@ -3,6 +3,7 @@
 
 #include <vector>    
 #include "Student.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
 public:
     bool authenticateAdmin(const string& inputPassword) const;  // Xac thuc admin
     void addStudent(const Student& student);  // Them sinh vien moi
+    bool removeStudent(const string& id);
     Student* findStudent(const string& studentId);  // Tim sinh vien theo ma
     void displayAllStudents() const;  // Hien thi danh sach sinh vien
     void displayAllTuitionFees() const; // Tat ca học phi

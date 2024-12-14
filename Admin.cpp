@@ -29,11 +29,11 @@ bool StudentManager::removeStudent(const string &id_delete)
 Student *StudentManager::findStudent(const string &studentId)
 {
     for (auto &student : students)
-    { // Duyet qua danh sach sinh vien
-        if (student->getId() == studentId)
-        {                   // So sanh ma sinh vien
-            return student; // Tra ve sinh vien tim thay
-        }
+    {                                      // Duyet qua danh sach sinh vien
+        if (student->getId() == studentId) // So sanh ma sinh vien
+            return student;                // Tra ve sinh vien tim thay
+        if (student->getName() == studentId)
+            return student;
     }
     return nullptr; // Neu khong tim thay sinh vien
 }

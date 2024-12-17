@@ -38,11 +38,15 @@ void Student::displayScores() const
     }
     else
     {
+        float GPA;
         cout << "\n\n\n\n\n\t\t\t\t\tScores:\n";
         for (const auto &entry : scores)
         {                                                                          // Duyet qua danh sach diem
             cout << "\t\t\t\t\t  " << entry.first << ": " << entry.second << endl; // Hien thi diem cua tung mon hoc
+            GPA += entry.second;
         }
+        GPA = GPA / int(scores.size());
+        cout << "\t\t\t\t\tGPA: " << GPA;
     }
 }
 
